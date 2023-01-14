@@ -87,6 +87,7 @@
                                 <td>Gia</td>
                                 <td>So luong</td>
                                 <td>Don gia</td>
+                                <td></td>
                             </thead>
                             <tbody id="list-item_select">
 
@@ -207,13 +208,14 @@
                 list.push(item);
                 // let html = ``;
                 html += `
-                     <tr>
+                     <tr id="${masp}">
                         <td>${masp}</td>
                         <td>${tensp}</td>
                         <td>${size}</td>
                         <td>${gia}</td>
                         <td>${soluong}</td>
                         <td>${dongia}</td>
+                        <td><button class="btn btn-danger" onclick="cancel('${masp}','${dongia}')"><i class="fa-solid fa-x"></i></button></td>
                      </tr>
                 `;
                 $('#list-item_select').html(html);
@@ -222,6 +224,7 @@
                 tongtien = tientra*((100-giamgia)/100);
                 $('#tongtien_user').val(tongtien);
             })
+
             //Lay danh sach ma nhan vien
             $.ajax({
                 url: "../../controller/user/show.php",
@@ -365,6 +368,18 @@
             }
         });
 
+        function cancel(masp, dongia) {
+            $('#'+ masp).hide();
+            for(let i = 0; i < list.length; i++){
+                if(list[i].masp == masp){
+                    list.splice(i,1);
+                }
+            }
+            tientra -= dongia;
+            $('#tientra').val(tientra);
+            tongtien = tientra*((100-giamgia)/100);
+            $('#tongtien_user').val(tongtien);
+        }
 </script>
 </body>
 </html>
