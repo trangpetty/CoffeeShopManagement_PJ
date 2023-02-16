@@ -53,11 +53,21 @@
                         </div>
                         <div class="form-group my-2">
                             <label for="chucvu_edit">Chuc vu</label>
-                            <input type="text" name="chucvu_edit" id="chucvu_edit" class="form-control">
+                            <select name="chucvu_edit" id="chucvu_edit" class="form-select ms-2">
+                                <option selected>Chon chuc vu</option>
+                                <option value="Thu ngan">Thu ngan</option>
+                                <option value="Boi ban">Boi ban</option>
+                                <option value="Pha che">Pha che</option>
+                            </select>
                         </div>
                         <div class="form-group my-2">
                             <label for="luongca_edit">Luong ca</label>
-                            <input type="number" name="luongca_edit" id="luongca_edit" class="form-control">
+                            <select name="luongca_edit" id="luongca_edit" class="form-select ms-2">
+                                <option selected>Chon luong ca</option>
+                                <option value="20000">20000</option>
+                                <option value="25000">25000</option>
+                                <option value="30000">30000</option>
+                            </select>
                         </div>
                     </div>
                 </form>

@@ -3,7 +3,7 @@
     extract($_GET);
     if(isset($_GET['masp_edit'])) {
         $masp = $_GET['masp_edit'];
-        $sql = "SELECT * FROM `sanpham` WHERE MASP='$masp'";
+        $sql = "SELECT * FROM sanpham WHERE MASP='$masp'";
         $result = mysqli_query($con,$sql);
         $response = array();
         while($row = mysqli_fetch_assoc($result)){
@@ -22,7 +22,7 @@
         $size_update = $_POST['size_update'];
         $nhomloai_update = $_POST['nhomloai_update'];
 
-        $sql = "UPDATE `sanpham` SET TENSP='$tensp_update', GIA='$gia_update', SIZE='$size_update', NHOMLOAI='$nhomloai_update' WHERE MASP='$masp_update'";
+        $sql = "call sp_crud_Sanpham( '$masp_update' , '$tensp_update', $gia_update, '$size_update', '$nhomloai_update', 'Update')";
         $result = mysqli_query($con,$sql);
     }
 ?>

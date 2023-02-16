@@ -3,7 +3,7 @@
     extract($_GET);
     if(isset($_GET['manv_edit'])) {
         $manv = $_GET['manv_edit'];
-        $sql = "SELECT * FROM `nhanvien` WHERE MANV='$manv'";
+        $sql = "call sp_crud_NhanVien ( '$manv' , '', '', 0 , '' , '', '', '', '' , '', '', 0.00 , 'Select' )";
         $result = mysqli_query($con,$sql);
         $response = array();
         while($row = mysqli_fetch_assoc($result)){
@@ -29,7 +29,7 @@
         $chucvu_update= $_POST['chucvu_update'];
         $luongca_update = $_POST['luongca_update'];
 
-        $sql = "UPDATE `nhanvien` SET HONV='$honv_update', TENNV='$tennv_update',GIOITINH='$gioitinh_update',NGAYSINH='$ngaysinh_update',NOISINH='$noisinh_update',DIACHI='$diachi_update',DIENTHOAI='$dienthoai_update',NGAYBDDILAM='$nbddl_update',SOCCCD='$scccd_update',CHUCVU='$chucvu_update',LUONGCA='$luongca_update' WHERE MANV='$manv_update'";
+        $sql = "call sp_crud_NhanVien ( '$manv_update' , '$honv_update', '$tennv_update', $gioitinh_update, '$ngaysinh_update', '$noisinh_update', '$diachi_update', '$dienthoai_update', '$nbddl_update', '$scccd_update', '$chucvu_update', $luongca_update , 'Update' )";
         $result = mysqli_query($con,$sql);
     }
 ?>

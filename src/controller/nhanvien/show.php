@@ -19,7 +19,7 @@
         $result = mysqli_query($con,$sql);
         while ($row = mysqli_fetch_assoc($result)) {
             $manv = $row['MANV'];
-            if($row['GIOITINH']) $sex = 'Nam';
+            if($row['GIOITINH'] == 1) $sex = 'Nam';
             else $sex = 'Nu';
             $table .= '
                 <tr>
@@ -42,7 +42,7 @@
 
     if(isset($_GET['manv_detail'])) {
         $manv = $_GET['manv_detail'];
-        $sql = "SELECT * FROM `nhanvien` WHERE MANV='$manv'";
+        $sql = "call sp_crud_NhanVien ( '$manv' , '', '', 0 , '' , '', '', '', '' , '', '', 0.00 , 'Select' )";
         $result = mysqli_query($con,$sql);
         $response = array();
         while($row = mysqli_fetch_assoc($result)){

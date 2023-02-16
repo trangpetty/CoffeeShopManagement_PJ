@@ -1,9 +1,9 @@
 <?php
     include '../../configuration/connect.php';
     extract($_GET);
-    if(isset($_GET['maban_edit'])) {
-        $maban = $_GET['maban_edit'];
-        $sql = "SELECT * FROM `ban` WHERE MABAN='$maban'";
+    if(isset($_GET['mahd_edit'])) {
+        $mahd = $_GET['mahd_edit'];
+        $sql = "SELECT * FROM hoadonbanhang WHERE MAHD='$mahd'";
         $result = mysqli_query($con,$sql);
         $response = array();
         while($row = mysqli_fetch_assoc($result)){
@@ -15,12 +15,10 @@
         $response['message'] = 'Invalidd or data not found';
     }
 
-    if(isset($_POST['ban_hidden_data'])){
-        $maban_update = $_POST['ban_hidden_data'];
-        $khuvuc_update= $_POST['khuvuc_update'];
-        $phuthu_update= $_POST['phuthu_update'];
-
-        $sql = "UPDATE `ban` SET KHUVUC='$khuvuc_update', PHUTHU='$phuthu_update' WHERE MABAN='$maban_update'";
+    extract($_POST);
+    if(isset($_POST['hoadon_hidden_data'])){
+        $mahd_update = $_POST['hoadon_hidden_data'];
+        $sql = "UPDATE `hoadonbanhang` SET MANV='$manvhd_update', SOTHE='$sothehd_update', NGAYLAPHD='$nlhd_update', GIOLAPHD='$glhd_update', GIAMGIA='$giamgia_update', MAKM='$makmhd_update',MABAN='$mabanhd_update',chuthich='$chuthich_update' where MAHD='$mahd_update'";
         $result = mysqli_query($con,$sql);
     }
 ?>

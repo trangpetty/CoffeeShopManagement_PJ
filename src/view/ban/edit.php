@@ -19,7 +19,7 @@
                         <input type="text" name="phuthu_edit" id="phuthu_edit" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="trangthai">Phu thu</label>
+                        <label for="trangthai">Trang thai</label>
                         <input type="checkbox" name="trangthai" id="trangthai">
                     </div>
                 </form>

@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group my-2">
                             <label for="chucvu_add">Chuc vu</label>
-                            <select name="chucvu_add" id="chucvu_add" class="form-select w-50 ms-2">
+                            <select name="chucvu_add" id="chucvu_add" class="form-select ms-2">
                                 <option selected>Chon chuc vu</option>
                                 <option value="Thu ngan">Thu ngan</option>
                                 <option value="Boi ban">Boi ban</option>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="form-group my-2">
                             <label for="luongca_add">Luong ca</label>
-                            <select name="luongca_add" id="luongca_add" class="form-select w-50 ms-2">
+                            <select name="luongca_add" id="luongca_add" class="form-select ms-2">
                                 <option selected>Chon luong ca</option>
                                 <option value="20000">20000</option>
                                 <option value="25000">25000</option>

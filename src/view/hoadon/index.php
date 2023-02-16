@@ -20,6 +20,7 @@ include 'edit.php';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <script>
+        var giamgia = 0;
         $(document).ready(function (){
             showData();
             $('#hoadon-btn_search').click(function (){
@@ -54,7 +55,6 @@ include 'edit.php';
 
         $(document).on('click','.btn-delete',function() {
             let mahd_del = $(this).attr('id');
-            console.log(mahd_del)
             if(confirm('Are you sure about want to delete?')){
                 $.ajax({
                     type: "post",
@@ -68,31 +68,26 @@ include 'edit.php';
         })
 
         $(document).on('click','.btn-edit',function() {
-            let manv_edit = $(this).attr('id');
+            let mahd_edit = $(this).attr('id');
+            $('#hoadon-modal_edit').modal("show");
             $.ajax({
-                type: "post",
+                type: "get",
                 url: '../../controller/hoadon/update.php',
-                data: { manv_edit: manv_edit},
-                success: function (data) {
-                    $.get("../../controller/hoadon/update.php", {manv_edit: manv_edit}, function (data,status){
+                data: { mahd_edit: mahd_edit},
+                success: function (data,status){
                         let hoadon = JSON.parse(data);
-                        $('#hoadon-hidden-data').val(hoadon.MANV);
-                        $('#manv_edit').val(hoadon.MANV);
-                        $('#honv_edit').val(hoadon.HONV);
-                        $('#tennv_edit').val(hoadon.TENNV);
-                        $("#hoadon-form_edit input[type='radio']:checked").val(hoadon.GIOITINH);
-                        $('#ngaysinhnv_edit').val(hoadon.NGAYSINH);
-                        $('#noisinh_edit').val(hoadon.NOISINH);
-                        $('#diachinv_edit').val(hoadon.DIACHI);
-                        $('#sdtnv_edit').val(hoadon.DIENTHOAI);
-                        $('#nbdl_edit').val(hoadon.NGAYBDDILAM);
-                        $('#scccdnv_edit').val(hoadon.SOCCCD);
-                        $('#chucvu_edit').val(hoadon.CHUCVU);
-                        $('#luongca_edit').val(hoadon.LUONGCA);
-                    });
+                        $('#hoadon-hidden-data').val(hoadon.MAHD);
+                        $('#mahd_edit').val(hoadon.MAHD);
+                        $('#manvhd_edit').val(hoadon.MANV);
+                        $('#sothehd_edit').val(hoadon.SOTHE);
+                        $('#nlhd_edit').val(hoadon.NGAYLAPHD);
+                        $('#glhd_edit').val(hoadon.GIOLAPHD);
+                        $('#giamgiahd_edit').val(hoadon.GIAMGIA);
+                        $('#makmhd_edit').val(hoadon.MAKM);
+                        $('#mabanhd_edit').val(hoadon.MABAN);
+                        $('#chuthich_edit').val(hoadon.chuthich);
                 }
             })
-            $('#hoadon-modal_edit').modal("show");
         })
 
         $(document).on('click','#hoadon-btn_edit',function() {
@@ -100,17 +95,14 @@ include 'edit.php';
                 type: "post",
                 url: '../../controller/hoadon/update.php',
                 data: {
-                    honv_update: $('#honv_edit').val(),
-                    tennv_update: $('#tennv_edit').val(),
-                    gioitinh_update: $("#hoadon-form_edit input[type='radio']:checked").val(),
-                    ngaysinh_update: $('#ngaysinhnv_edit').val(),
-                    noisinh_update: $('#noisinh_edit').val(),
-                    diachi_update: $('#diachinv_edit').val(),
-                    dienthoai_update: $('#sdtnv_edit').val(),
-                    nbddl_update: $('#nbdl_edit').val(),
-                    scccd_update: $('#scccdnv_edit').val(),
-                    chucvu_update: $('#chucvu_edit').val(),
-                    luongca_update: $('#luongca_edit').val(),
+                    manvhd_update: $('#manvhd_edit').val(),
+                    sothehd_update: $('#sothehd_edit').val(),
+                    nlhd_update: $("#nlhd_edit").val(),
+                    glhd_update: $('#glhd_edit').val(),
+                    giamgia_update: $('#giamgiahd_edit').val(),
+                    makmhd_update: $('#makmhd_edit').val(),
+                    mabanhd_update: $('#mabanhd_edit').val(),
+                    chuthich_update: $('#chuthich_edit').val(),
                     hoadon_hidden_data: $('#hoadon-hidden-data').val()
                 },
                 success: function (data) {
@@ -121,32 +113,38 @@ include 'edit.php';
 
         })
 
-        $(document).on('click','.btn-detail',function() {
-            let manv_detail = $(this).attr('id');
+        $('#sothehd_edit').on('change', function () {
+            let sothe =  this.value;
             $.ajax({
-                type: "post",
-                url: '../../controller/hoadon/show.php',
-                data: { manv_detail: manv_detail},
+                url: "../../controller/user/show.php",
+                type: "get",
+                data: {
+                    sothe_user_giam: sothe
+                },
                 success: function (data) {
-                    $.get("../../controller/hoadon/show.php", {manv_detail: manv_detail}, function (data,status){
-                        let hoadon = JSON.parse(data);
-                        $('#manv_detail').val(hoadon.MANV);
-                        $('#honv_detail').val(hoadon.HONV);
-                        $('#tennv_detail').val(hoadon.TENNV);
-                        $("#hoadon-form_detail input[type='radio']:checked").val(hoadon.GIOITINH);
-                        $('#ngaysinhnv_detail').val(hoadon.NGAYSINH);
-                        $('#noisinh_detail').val(hoadon.NOISINH);
-                        $('#diachinv_detail').val(hoadon.DIACHI);
-                        $('#sdtnv_detail').val(hoadon.DIENTHOAI);
-                        $('#nbdl_detail').val(hoadon.NGAYBDDILAM);
-                        $('#scccdnv_detail').val(hoadon.SOCCCD);
-                        $('#chucvu_detail').val(hoadon.CHUCVU);
-                        $('#luongca_detail').val(hoadon.LUONGCA);
-                    });
+                    let hoivien = JSON.parse(data);
+                    let loaihv = hoivien.LOAIHV;
+                    if(loaihv == 'VIP1')   {giamgia += 5;}
+                    else if (loaihv == 'VIP2') {giamgia += 10;}
+                    else if (loaihv == 'VIP3') {giamgia += 15;}
+                    $('#giamgiahd_edit').val(giamgia);
                 }
-            })
-            $('#hoadon-modal_detail').modal("show");
+            });
         })
-
+        //Lay giam gia khuyen mai
+        $('#makmhd_edit').on('change', function () {
+            let makm =  this.value;
+            $.ajax({
+                url: "../../controller/user/show.php",
+                type: "get",
+                data: {
+                    makm_user_giam: makm
+                },
+                success: function (data) {
+                    giamgia += parseInt(data);
+                    $('#giamgiahd_edit').val(giamgia);
+                }
+            });
+        })
     </script>
 <?php include '../layout/footer.php'; ?>

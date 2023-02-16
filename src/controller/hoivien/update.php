@@ -3,7 +3,7 @@
     extract($_GET);
     if(isset($_GET['sothe_edit'])) {
         $sothe = $_GET['sothe_edit'];
-        $sql = "SELECT * FROM `hoivien` WHERE SOTHE='$sothe'";
+        $sql = "call sp_crud_Hoivien( '$sothe' , '', '', '', '', '', 0, '', 'Select')";
         $result = mysqli_query($con,$sql);
         $response = array();
         while($row = mysqli_fetch_assoc($result)){
@@ -23,9 +23,11 @@
         $sdt_update = $_POST['sdt_update'];
         $scccd_update = $_POST['scccd_update'];
         $diemtl_update = $_POST['diemtl_update'];
-        $loaihv_update = $_POST['loaihv_update'];
+        if($diemtl_update <= 5) $loaihv = "VIP1";
+        elseif ($diemtl_update > 5 && $diemtl_update <= 15) $loaihv = "VIP2";
+        elseif ($diemtl_update > 15) $loaihv = "VIP3";
 
-        $sql = "UPDATE `hoivien` SET TENHV='$tenhv_update',NGAYSINH='$ngaysinhhv_update',DIACHI='$diachi_update',DIENTHOAI='$sdt_update',SOCCCD='$scccd_update',DIEMTL='$diemtl_update',LOAIHV='$loaihv_update' WHERE SOTHE='$sothe_update'";
+        $sql = "call sp_crud_Hoivien( '$sothe_update' , '$tenhv_update', '$ngaysinhhv_update', '$diachi_update', '$sdt_update', '$scccd_update', $diemtl_update, '$loaihv', 'Update')";
         $result = mysqli_query($con,$sql);
     }
 ?>

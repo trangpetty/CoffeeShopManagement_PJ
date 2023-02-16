@@ -200,7 +200,7 @@
 //    Lay danh sach ma khuyen mai
     if(isset($_GET['makm_user'])){
         $select_makm = '<option selected value="KM00">Chon ma khuyen mai</option>';
-        $sql = "SELECT MAKM FROM `khuyenmai` WHERE MAKM !='KM00'";
+        $sql = "SELECT MAKM FROM `khuyenmai` WHERE DATEDIFF(TGKETTHUC, CURRENT_DATE()) > 0";
         $result = mysqli_query($con,$sql);
         while ($row = mysqli_fetch_assoc($result)) {
             $makm = $row['MAKM'];

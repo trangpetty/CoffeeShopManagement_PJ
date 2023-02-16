@@ -45,5 +45,50 @@
         $table .= '</table>';
         echo $table;
     }
+
+    //  Lay danh sach hoi vien
+    if(isset($_GET['sothehd_edit'])){
+        $select_hv = '';
+        $sql = "SELECT SOTHE FROM `hoivien`";
+        $result = mysqli_query($con,$sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            $sothe = $row['SOTHE'];
+            $select_hv .= '<option value="'.$sothe.'">'.$sothe.'</option>';
+        }
+        echo $select_hv;
+    }
+    //    Lay danh sach ma khuyen mai
+    if(isset($_GET['makmhd_edit'])){
+        $select_makm = '';
+        $sql = "SELECT MAKM FROM `khuyenmai`";
+        $result = mysqli_query($con,$sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            $makm = $row['MAKM'];
+            $select_makm .= '<option value="'.$makm.'">'.$makm.'</option>';
+        }
+        echo $select_makm;
+    }
+
+    if(isset($_GET['manvhd_edit'])){
+        $select_manv = '';
+        $sql = "SELECT MANV FROM `nhanvien`";
+        $result = mysqli_query($con,$sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            $manv = $row['MANV'];
+            $select_manv .= '<option value="'.$manv.'">'.$manv.'</option>';
+        }
+        echo $select_manv;
+    }
+
+    if(isset($_GET['mabanhd_edit'])){
+        $select_maban = '';
+        $sql = "SELECT MABAN FROM `ban`";
+        $result = mysqli_query($con,$sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            $maban = $row['MABAN'];
+            $select_maban .= '<option value="'.$maban.'">'.$maban.'</option>';
+        }
+        echo $select_maban;
+    }
 ?>
 

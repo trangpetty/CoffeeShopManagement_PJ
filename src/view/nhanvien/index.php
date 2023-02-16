@@ -125,7 +125,12 @@
                         $('#manv_edit').val(nhanvien.MANV);
                         $('#honv_edit').val(nhanvien.HONV);
                         $('#tennv_edit').val(nhanvien.TENNV);
-                        $("#nhanvien-form_edit input[type='radio']:checked").val(nhanvien.GIOITINH);
+                        if(nhanvien.GIOITINH == 1){
+                            $("input:radio[name=gioitinh_edit][value=1]").click();
+                        }else{
+                            $("input:radio[name=gioitinh_edit][value=0]").click();
+                        }
+                        //$("input:radio[name=gioitinh_edit][value=nhanvien.GIOITINH]").click();
                         $('#ngaysinhnv_edit').val(nhanvien.NGAYSINH);
                         $('#noisinh_edit').val(nhanvien.NOISINH);
                         $('#diachinv_edit').val(nhanvien.DIACHI);
@@ -141,6 +146,7 @@
         })
 
         $(document).on('click','#nhanvien-btn_edit',function() {
+            console.log($("#nhanvien-form_edit input[type='radio']:checked").val())
             $.ajax({
                 type: "post",
                 url: '../../controller/nhanvien/update.php',
@@ -169,16 +175,15 @@
         $(document).on('click','.btn-detail',function() {
             let manv_detail = $(this).attr('id');
             $.ajax({
-                type: "post",
+                type: "get",
                 url: '../../controller/nhanvien/show.php',
                 data: { manv_detail: manv_detail},
                 success: function (data) {
-                    $.get("../../controller/nhanvien/show.php", {manv_detail: manv_detail}, function (data,status){
                         let nhanvien = JSON.parse(data);
                         $('#manv_detail').val(nhanvien.MANV);
                         $('#honv_detail').val(nhanvien.HONV);
                         $('#tennv_detail').val(nhanvien.TENNV);
-                        $("#nhanvien-form_detail input[type='radio']:checked").val(nhanvien.GIOITINH);
+                        // $("#nhanvien-form_detail input[type='radio']:checked").val(nhanvien.GIOITINH);
                         $('#ngaysinhnv_detail').val(nhanvien.NGAYSINH);
                         $('#noisinh_detail').val(nhanvien.NOISINH);
                         $('#diachinv_detail').val(nhanvien.DIACHI);
@@ -187,7 +192,8 @@
                         $('#scccdnv_detail').val(nhanvien.SOCCCD);
                         $('#chucvu_detail').val(nhanvien.CHUCVU);
                         $('#luongca_detail').val(nhanvien.LUONGCA);
-                    });
+                        if(nhanvien.GIOITINH == 1) $("#gioitinh_detail").val('Nam');
+                        else $("#gioitinh_detail").val('Nu');
                 }
             })
             $('#nhanvien-modal_detail').modal("show");

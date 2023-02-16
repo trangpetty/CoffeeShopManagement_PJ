@@ -3,7 +3,7 @@
     extract($_GET);
     if(isset($_GET['makm_edit'])) {
         $makm = $_GET['makm_edit'];
-        $sql = "SELECT * FROM `khuyenmai` WHERE MAKM='$makm'";
+        $sql = "call sp_crud_KhuyenMai('$makm', '', '', '', 0.0,'Select')";
         $result = mysqli_query($con,$sql);
         $response = array();
         while($row = mysqli_fetch_assoc($result)){
@@ -22,7 +22,7 @@
         $tgkt_update = $_POST['tgkt_update'];
         $giatri_update = $_POST['giatri_update'];
 
-        $sql = "UPDATE `khuyenmai` SET TENKM='$tenkm_update', TGAPDUNG='$tgap_update', TGKETTHUC = '$tgkt_update', GIATRI='$giatri_update' WHERE MAKM='$makm_update'";
+        $sql = "call sp_crud_KhuyenMai('$makm_update', '$tenkm_update', '$tgap_update', '$tgkt_update', $giatri_update,'Update')";
         $result = mysqli_query($con,$sql);
     }
 ?>

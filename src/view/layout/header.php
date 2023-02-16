@@ -19,9 +19,27 @@
     <link rel="stylesheet" href="../../../assets/style.css">
     <script src="../../../assets/bootstrap-5.2.1-dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../../assets/jquery-3.6.1.min.js"></script>
+    <script src="../../../assets/chart.js"></script>
     <title>AJAX LESSON</title>
 </head>
 <body>
+
+<!--    <div id="viewport">-->
+<!--        <div id="sidebar">-->
+<!--            <ui class="nav">-->
+<!--                <li>-->
+<!--                    <a class="nav-link active" href="../hoadon/index.php">Hoa don</a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a class="nav-link active" href="../hoadon/index.php">Hoa don</a>-->
+<!--                </li>-->
+<!--            </ui>-->
+<!--        </div>-->
+<!---->
+<!--        <div id="content">-->
+<!---->
+<!--        </div>-->
+<!--    </div>-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 bg-brown bg-gradient">
         <div class="navbar-brand" href="">
             <i class="fa-solid fa-store text-white"></i>
@@ -33,25 +51,28 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item mx-2">
-                    <a class="nav-link " href="../hoadon/index.php">Hoa don</a>
+                    <a class="nav-link active" href="../hoadon/index.php">Hoa don</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link " href="../nhanvien/index.php">Nhan vien</a>
+                    <a class="nav-link" href="../thongke/index.php">Thong ke</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link " href="../hoivien/index.php">Hoi vien</a>
+                    <a class="nav-link" href="../nhanvien/index.php">Nhan vien</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link active" href="../sanpham/index.php">San pham</a>
+                    <a class="nav-link" href="../hoivien/index.php">Hoi vien</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link " href="../sochamcong/index.php">So cham cong</a>
+                    <a class="nav-link" href="../sanpham/index.php">San pham</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link " href="../ban/index.php">Ban</a>
+                    <a class="nav-link" href="../sochamcong/index.php">So cham cong</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link " href="../khuyenmai/index.php">Khuyen mai</a>
+                    <a class="nav-link" href="../ban/index.php">Ban</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="../khuyenmai/index.php">Khuyen mai</a>
                 </li>
             </ul>
         </div>
@@ -61,6 +82,13 @@
         </div>
     </nav>
     <script>
+        $(document).ready(function (){
+            $(".navbar-nav .nav-item a").click( function (){
+                $('.nav-item').removeClass('active');
+                $(this).addClass('active');
+            })
+        })
+
         $("#btn-logout").click(function (){
             if(confirm("Are you sure you want to logout?")){
                 $.ajax({
@@ -73,4 +101,5 @@
                 });
             }
         })
+
     </script>
