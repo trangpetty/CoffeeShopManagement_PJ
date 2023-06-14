@@ -1,0 +1,28 @@
+
+    <style>
+        .toast-fade {
+            transition: opacity 0.3s linear !important;
+        }
+        .toast {
+            z-index: 10000;
+        }
+    
+    </style>
+    <div class="toast-container bottom-0 end-0 p-3" >
+        <div class="toast toast-fade text-bg-success border-0 align-items-center position-fixed bottom-0" id="toast-success" role="alert" aria-live="assertive" >
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="fa-solid fa-circle-check"></i> <span id="toast-text"></span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="toast toast-fade text-bg-danger border-0 align-items-center" id="toast-failed" role="alert" aria-live="assertive">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="fa-sharp fa-solid fa-circle-exclamation"></i> <span id="toast-fail_text"></span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>

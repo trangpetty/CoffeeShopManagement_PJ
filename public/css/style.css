@@ -1,0 +1,53 @@
+:root {
+    --brown: #724e2c;
+}
+.bg-brown {
+    border-color: var(--brown)!important;
+    background-color: var(--brown)!important;
+}
+
+.text-brown {
+    color: var(--brown)!important;
+}
+
+body {
+    color: var(--brown)!important;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+    outline: var(--brown)!important;
+}
+
+#order-form-body ul li{
+    list-style: none;
+}
+
+@media screen and (min-width:576px) {
+    .carousel-inner {
+        display: flex;
+    }
+    .carousel-item {
+        display: block;
+        margin-right: 0;
+        flex: 0 0 calc(100%/4);
+    }
+}
+.card{
+    margin: 0 0.5em;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover{
+    background-color: #ccc;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon{
+    background-color: #333;
+}
+
