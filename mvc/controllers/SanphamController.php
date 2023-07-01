@@ -11,13 +11,12 @@
         }
         
         function getList () {
-            $sanpham = $this->model("Sanpham");
-            return $this->view('sanpham/list', ['sanpham' => $sanpham->orderBy($_POST['text'], $_POST['filter'])]);
+            $this->paginate(5, 'Sanpham', 'MASP', $_POST['text'], $_POST['filter']);
         }
         
         function search () {
             $sanpham = $this->model("Sanpham");
-            return $this->view('sanpham/list', ['sanpham' => $sanpham->like('MASP', '%'.$_POST['pattern'].'%')]);
+            return $this->view('sanpham/list', ['data' => $sanpham->like('MASP', '%'.$_POST['pattern'].'%')]);
         }
 
         function getDetail ($id) {

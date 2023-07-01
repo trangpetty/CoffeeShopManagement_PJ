@@ -8,32 +8,32 @@
             <div class="modal-body">
                 <form id="hoivien-form">
                     <div class="form-group my-2" id="sothe-input">
-                        <label for="sothe">Ma hoi vien</label>
+                        <label for="sothe">Số thẻ <span class="text-danger">*</span></label>
                         <input type="text" name="sothe" id="sothe" class="form-control">
                     </div>
                     <div class="form-group my-2">
-                        <label for="tenhv">Ten hoi vien</label>
+                        <label for="tenhv">Tên hội viên <span class="text-danger">*</span></label>
                         <input type="text" name="tenhv" id="tenhv" class="form-control">
                     </div>
                     <div class="form-group my-2">
-                        <label for="ngaysinhhv">Ngay sinh</label>
+                        <label for="ngaysinhhv">Ngày sinh <span class="text-danger">*</span></label>
                         <input type="date" name="ngaysinhhv" id="ngaysinhhv" class="form-control">
                     </div>
                     <div class="form-group my-2">
-                        <label for="diachihv">Dia chi</label>
+                        <label for="diachihv">Địa chỉ</label>
                         <input type="text" name="diachihv" id="diachihv" class="form-control">
                     </div>
                     <div class="form-group my-2">
-                        <label for="sdthv">SO dien thoai</label>
+                        <label for="sdthv">Số điện thoại</label>
                         <input type="text" name="sdthv" id="sdthv" class="form-control">
                     </div>
                     <div class="form-group my-2">
-                        <label for="scccdhv">So can cuoc cong dan</label>
+                        <label for="scccdhv">Số CCCD</label>
                         <input type="text" name="scccdhv" id="scccdhv" class="form-control">
                     </div>
-                    <div class="form-group my-2">
-                        <label for="diemtl">Diem tich luy</label>
-                        <input type="text" name="diemtl" id="diemtl" class="form-control">
+                    <div class="form-group my-2" id="diemtl_add">
+                        <label for="diemtl">Điểm tích lũy</label>
+                        <input type="number" name="diemtl" id="diemtl" class="form-control" min="0" value="0">
                     </div>
                 </form>
             </div>

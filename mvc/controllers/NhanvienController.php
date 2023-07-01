@@ -11,13 +11,12 @@
         }
         
         function getList () {
-            $nhanvien = $this->model("Nhanvien");
-            return $this->view('nhanvien/list', ['nhanvien' => $nhanvien->orderBy($_POST['text'], $_POST['filter'])]);
+            $this->paginate(2, 'Nhanvien', 'MANV', $_POST['text'], $_POST['filter']);
         }
         
         function search () {
             $nhanvien = $this->model("Nhanvien");
-            return $this->view('nhanvien/list', ['nhanvien' => $nhanvien->like('MANV', '%'.$_POST['pattern'].'%')]);
+            return $this->view('nhanvien/list', ['data' => $nhanvien->orlike('MANV', 'TENNV', '%'.$_POST['pattern'].'%')]);
         }
 
         function getDetail ($id) {

@@ -1,7 +1,7 @@
-<h1 class="text-center text-brown">LUONG NHAN VIEN THANG <?php echo date('m') ?></h1>
+<h1 class="text-center text-brown">LƯƠNG NHÂN VIÊN THÁNG <span id="month"></span></h1>
 
 <div class="d-flex float-end mb-3 align-items-center" style="width:150px;">
-    <p class="mx-2 my-0">Chon thang</p>
+    <p class="mx-2 my-0">Chọn tháng</p>
     <select id="select-month">
         <option value="1">1</option>
         <option value="2">2</option>
@@ -17,38 +17,37 @@
         <option value="12">12</option>
     </select>
 </div>
-<table class="table mx-auto" id="luong-table">
+<table class="table mx-auto">
     <thead class="bg-brown text-white">
         <tr>
-            <td>Ma NV</td>
-            <td>Ho ten NV</td>
-            <td>So cong</td>
-            <td>Luong ca</td>
-            <td>Luong</td>
+            <td>Mã NV</td>
+            <td>Họ tên NV</td>
+            <td>Số công</td>
+            <td>Lương ca</td>
+            <td>Lương</td>
         </tr>
     </thead>
-    <tbody>
-        <?php 
-            while ($row = mysqli_fetch_assoc($data['luong'])) { 
-        ?>
-        <tr>            
-            <td><?php echo $row['MANV']?></td>
-            <td><?php echo $row['HONV'].' '.$row['TENNV']?></td>
-            <td><?php echo $row['socong'] ?></td>
-            <td><?php echo $row['LUONGCA']?></td>
-            <td><?php echo $row['luong']?></td>            
-        </tr>
-        <?php }?>
+    <tbody id="luong-table">
+        
     </tbody>
 </table>
 <script>
     const d = new Date();
     let month = d.getMonth() + 1;
     $('#select-month').val(month);
+    $("#month").text($('#select-month').val())
+    function showData () {
+        month = $('#select-month').val();
+        $.post('/php_tur/QLBH_CF/Thongke/getLuongMonth', {month: month}, (data) => {
+            $("#luong-table").html(data);
+        })
+    }
+    showData();
     $('#select-month').on('change', function () {
         month = $('#select-month').val();
-        $.get('/php_tur/QLBH_CF/Thongke/luongMonth', {month: month}, (data) => {
-            
+        $("#month").text($('#select-month').val())
+        $.post('/php_tur/QLBH_CF/Thongke/getLuongMonth', {month: month}, (data) => {
+            $("#luong-table").html(data);
         })
     })
 </script>

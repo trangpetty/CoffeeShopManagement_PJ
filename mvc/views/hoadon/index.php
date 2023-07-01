@@ -1,6 +1,14 @@
 <div id="hoadon-page">
-    <h1 class="text-center text-brown">HOA DON</h1>
+    <h1 class="text-center text-brown">HÓA ĐƠN</h1>
     <div class="d-flex my-2 justify-content-between">
+        <div class="d-flex">
+            <select class="form-select me-2" id="hoadon-select_orderby">
+                <option value="MAHD">Mã hoá đơn</option>
+                <option value="MANV">Mã nhân viên</option>
+                <option value="NGAYLAPHD">Ngày</option>
+            </select>
+            <div class="d-flex flex-column me-4"><i class="fa-solid fa-caret-up asc icon-arrow active" style="cursor: pointer"></i><i class="fa-solid fa-caret-down desc icon-arrow" style="cursor: pointer"></i></div>
+        </div>
         <div class="d-flex">
             <input type="text" class="form-control" id="hoadon-search_input" autocomplete="off" placeholder="Search">
             <button class="btn btn-dark bg-brown" id="hoadon-btn_search"><i class="fa fa-search"></i></button>
@@ -13,11 +21,11 @@
         <div class="modal-dialog w-75">
             <div class="modal-content">
                 <div class="modal-header d-flex align-items-center">
-                    <h3 class="modal-title" id="exampleModallabel">Xoa hoa don</h3>
+                    <h3 class="modal-title" id="exampleModallabel">Xóa hóa đơn</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Ban co muon xoa thong tin hoa don <span class="h4 fw-bold" id="mahd_delete"></span></p>
+                    <p>Bạn có muốn xóa thông tin hóa đơn <span class="h4 fw-bold" id="mahd_delete"></span></p>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-danger" id="hoadon-btn_delete">Delete</button>
@@ -30,10 +38,11 @@
 
     
     <script>
+        var text = 'MAHD';
         var giamgia = 0;
         $(document).on("click", '.page-item', function() {
             let page = $(this).attr("id");
-            //showData(page);
+            showData(page);
         })
 
         $(document).ready(function (){
@@ -57,11 +66,30 @@
             })
         });
         
-        function showData(){
-            $.get('/php_tur/QLBH_CF/Hoadon/getList/', {}, (data) => {
+        function showData(page){
+            $.post('/php_tur/QLBH_CF/Hoadon/getList/', {page: page, text: text, filter: 'asc'}, (data) => {
                 $('#hoadon-table_show').html(data);
             })
         }
+
+        function orderBy(text, filter) {
+            $.post('/php_tur/QLBH_CF/Hoadon/getList/', {text: text, filter: filter}, (data) => {
+                $('#hoadon-table_show').html(data);
+            })
+        }
+
+        $('#hoadon-select_orderby').on('change', function() {
+            text = $('#hoadon-select_orderby').val();
+            orderBy(text, 'asc');
+        })
+
+        $(document).on('click','.asc',function() {
+            orderBy(text, 'asc');
+        })
+
+        $(document).on('click','.desc',function() {
+            orderBy(text, 'desc');
+        })
 
         $(document).on('click','.btn-detail', function() {
             let id = $(this).attr('id');

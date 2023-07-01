@@ -3,26 +3,24 @@
     include 'add.php';
 ?>
 <div id="nhanvien-page">
-    <h1 class="text-center text-brown">NHAN VIEN</h1>
+    <h1 class="text-center text-brown">NHÂN VIÊN</h1>
     <div class="d-flex my-2 justify-content-between">
         <button type="button" class="bg-brown btn btn-dark" id='nhanvien-btn_add'>
             <i class="fas fa-circle-plus"></i>
-            Add
+            Thêm
         </button>         
         <div class="d-flex">
             <select class="form-select me-2" id="nhanvien-select_orderby">
-                <option value="MANV">Ma nhan vien</option>
-                <option value="HONV">Ho</option>
-                <option value="TENNV">Ten</option>
-                <option value="LUONGCA">Luong</option>
+                <option value="MANV">Mã nhân viên</option>
+                <option value="HONV">Họ</option>
+                <option value="TENNV">Tên</option>
+                <option value="LUONGCA">Lương</option>
             </select>
-            <div class="d-flex flex-column me-4"><i class="fa-solid fa-caret-up asc" style="cursor: pointer"></i><i class="fa-solid fa-caret-down desc" style="cursor: pointer"></i></div>
+            <div class="d-flex flex-column me-4"><i class="fa-solid fa-caret-up asc icon-arrow active" style="cursor: pointer"></i><i class="fa-solid fa-caret-down desc icon-arrow" style="cursor: pointer"></i></div>
             <input type="text" class="form-control" id="nhanvien-search_input" autocomplete="off" placeholder="Search">
             <button class="bg-brown btn btn-dark" id="nhanvien-btn_search"><i class="fa fa-search"></i></button>
         </div>
     </div>
-
-    <div id="nhanvien-table_show"></div>
 
     <div class="modal fade" id="nhanvien-modal_delete" tabindex="-1" aria-labelledby="detail_modal" aria-hidden="true">
         <div class="modal-dialog w-75">
@@ -32,7 +30,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Ban co muon xoa thong tin nhan vien <span class="h4 fw-bold" id="manv_delete"></span></p>
+                    <p>Bạn có muốn xóa thông tin nhân viên <span class="h4 fw-bold" id="manv_delete"></span></p>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-danger" id="nhanvien-btn_delete">Delete</button>
@@ -41,24 +39,7 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="nhanvien-modal_deleteArr" tabindex="-1" aria-labelledby="detail_modal" aria-hidden="true">
-        <div class="modal-dialog w-75">
-            <div class="modal-content">
-                <div class="modal-header d-flex align-items-center">
-                    <h3 class="modal-title" id="exampleModallabel">Xoa nhan vien</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Ban co muon xoa thong tin cac nhan vien nay?</p>
-                </div>
-                <div class="modal-footer">
-                    <button id="btn-delete_arr" class="btn btn-danger">Delete</button>
-                    <button class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="nhanvien-table_show"></div>
 </div>
     <script>
         var text = 'MANV';
@@ -78,8 +59,16 @@
             })
         })
 
-        function showData(){
-            orderBy(text, 'asc');
+        $(document).on("click", '.page-item', function() {
+            let page = $(this).attr("id");
+            showData(page);
+        })
+        
+
+        function showData(page){
+            $.post('/php_tur/QLBH_CF/Nhanvien/getList/', {page: page, text: text, filter: 'asc'}, (data) => {
+                $('#nhanvien-table_show').html(data);
+            })
         }
 
         function orderBy(text, filter) {
@@ -168,6 +157,7 @@
         $(document).on('click','.btn-delete',function() {
             let manv_del = $(this).attr('id');
             $('#manv_delete').text(manv_del);
+            $('.modal-title').html('Xóa thông tin nhân viên');
             $('#nhanvien-modal_delete').modal('show');
         })
         
@@ -185,7 +175,7 @@
 
         $(document).on('click','.btn-edit',function() {
             var id = $(this).attr('id');
-            $('.modal-title').html('Sua thong tin nhan vien <h4 class="fw-bold" id="manv_edit">' + id + '</h4>');
+            $('.modal-title').html('Sửa thông tin nhân viên <h4 class="fw-bold" id="manv_edit">' + id + '</h4>');
             $('#nhanvien-btn_text').text('Update');
             $('#manv-input').hide()
             $.get('/php_tur/QLBH_CF/Nhanvien/getDetail/'+id, {}, (data) => {

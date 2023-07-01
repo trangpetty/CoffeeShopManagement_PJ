@@ -1,17 +1,17 @@
 <table class="table mx-auto table-striped text-center" id="sanpham-table">
     <thead class="bg-brown text-white">
         <tr>
-            <td>Ma SP</td>
-            <td>Ten SP</td>
-            <td>Gia</td>
+            <td>Mã SP</td>
+            <td>Tên SP</td>
+            <td>Giá</td>
             <td>Size</td>
-            <td>Nhom loai</td>
-            <td>Actions</td>
+            <td>Nhóm loại</td>
+            <td>Thao tác</td>
         </tr>
     </thead>
     <tbody>
         <?php 
-            while ($row = mysqli_fetch_assoc($data['sanpham'])) { 
+            while ($row = mysqli_fetch_assoc($data['data'])) { 
         ?>
         <tr>            
             <td><?php echo $row['MASP']?></td>
@@ -27,24 +27,8 @@
         <?php }?>
     </tbody>
 </table>
-
-<script>
-    function orderBy(text, filter) {
-            $.post('/php_tur/QLBH_CF/Sanpham/getList/', {text: text, filter: filter}, (data) => {
-                $('#sanpham-table_show').html(data);
-            })
-        }
-    $('input[type="checkbox"]').click(function() {
-            let id = $(this).attr('name');
-            console.log(id)
-            arr.push(id);
-        })
-
-    $('#btn-delete_arr').click(function() {
-        console.log(arr)
-        $.post('/php_tur/QLBH_CF/Sanpham/deleteArr/', {arr: arr}, function(data) {
-            $('#sanpham-modal_deleteArr').modal('hide');
-            orderBy('MASP', 'ASC');
-        })
-    })
-</script>
+<?php
+    if(isset($data['display'])) {
+        echo $data['display']; 
+    } 
+?>

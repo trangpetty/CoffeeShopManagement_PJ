@@ -1,10 +1,26 @@
-<h1 class="text-center text-brown">THONG KE</h1>
+<h1 class="text-center text-brown">THỐNG KÊ</h1>
 <div class="d-flex">
     <canvas id="myChart" style="width:100%;max-width:600px" class="mb-3"></canvas>
-    <div id="top_products" class="w-50"></div>
+    <div class="w-50">
+        <div class="d-flex justify-content-between mb-2 w-100">
+            <h3>Top 3 Sản phẩm bán chạy</h3>
+            <select name="select_top_product" id="select_top_product" class="form-select" style="width: 8rem;height: 2.5rem;">
+                <option value="day">Ngày</option>
+                <option value="month">Tháng</option>
+            </select>
+        </div>
+        <div id="top_products"></div>
+    </div>
 </div>
 
 <hr>
+<div class="d-flex justify-content-between mb-2">
+    <h3>Doanh thu</h3>
+    <select name="select_time" id="select_time" class="form-select" style="width: 8rem;height: 2.5rem;">
+        <option value="day">Ngày</option>
+        <option value="month">Tháng</option>
+    </select>
+</div>
 <div id="doanhthu"></div>
 </div>
 
@@ -58,5 +74,31 @@
             });
         })        
     }
+
+    $('#select_time').on('change', function() {
+        if ($('#select_time').val() == 'day') {
+            $.get('/php_tur/QLBH_CF/Thongke/getDoanhthu', {}, (data) => {
+                $('#doanhthu').html(data);
+            })
+        }
+        else {
+            $.get('/php_tur/QLBH_CF/Thongke/getDoanhthuMonth', {}, (data) => {
+                $('#doanhthu').html(data);
+            })
+        }
+    })
+
+    $('#select_top_product').on('change', function() {
+        if ($('#select_top_product').val() == 'month') {
+            $.get('/php_tur/QLBH_CF/Thongke/getTopSP', {}, (data) => {
+                $('#top_products').html(data);
+            })
+        }
+        else {
+            $.get('/php_tur/QLBH_CF/Thongke/getTopSPDay', {}, (data) => {
+                $('#top_products').html(data);
+            })
+        }
+    })
     
 </script>

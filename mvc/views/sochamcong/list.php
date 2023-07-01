@@ -1,15 +1,15 @@
 <table class="table mx-auto table-striped text-center" id="sochamcong-table">
     <thead class="bg-brown text-white">
         <tr>
-            <td>Ma NV</td>
+            <td>Mã NV</td>
             <td>Ca</td>
-            <td>Ngay lam</td>            
-            <td>Actions</td>
+            <td>Ngày làm</td>            
+            <td>Thao tác</td>
         </tr>
     </thead>
     <tbody>
         <?php 
-            while ($row = mysqli_fetch_assoc($data['sochamcong'])) {                 
+            while ($row = mysqli_fetch_assoc($data['data'])) {                 
         ?>
         <tr>
             <td><?php echo $row['MANV']?></td>
@@ -22,11 +22,9 @@
         <?php }?>
     </tbody>
 </table>
+<?php
+    if(isset($data['display'])) {
+        echo $data['display']; 
+    } 
+?>
 
-<script>
-    function orderBy(text, filter) {
-            $.post('/php_tur/QLBH_CF/sochamcong/getList/', {text: text, filter: filter}, (data) => {
-                $('#sochamcong-table_show').html(data);
-            })
-    }    
-</script>

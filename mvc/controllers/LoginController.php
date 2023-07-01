@@ -51,6 +51,7 @@
             else {
                 $this->model("Account")->create($_POST['username'], $_POST['password']);
                 $response['status'] = 'Success';
+                $_SESSION['role'] = 1;
             } 
             
             echo json_encode($response['status']);

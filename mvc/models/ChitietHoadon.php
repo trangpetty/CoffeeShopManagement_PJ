@@ -19,8 +19,18 @@
             return mysqli_query($this->con, $sql);
         }
 
+        public function getTopSPDay () {
+            $sql = "SELECT chitiethoadon_banhang.MASP, sanpham.TENSP, sanpham.SIZE, sum(chitiethoadon_banhang.SOLUONG) as so_luong, sanpham.GIA, sum(chitiethoadon_banhang.DONGIA) as don_gia, hoadonbanhang.NGAYLAPHD FROM chitiethoadon_banhang INNER JOIN hoadonbanhang ON chitiethoadon_banhang.MAHD = hoadonbanhang.MAHD INNER JOIN sanpham ON chitiethoadon_banhang.MASP = sanpham.MASP WHERE hoadonbanhang.NGAYLAPHD = CURRENT_DATE() GROUP BY chitiethoadon_banhang.MASP ORDER BY so_luong DESC LIMIT 3";
+            return mysqli_query($this->con, $sql);
+        }
+
         public function getDoanhthu () {
             $sql = "SELECT chitiethoadon_banhang.MASP, sanpham.TENSP, sanpham.SIZE, sum(chitiethoadon_banhang.SOLUONG) as so_luong, sanpham.GIA, sum(chitiethoadon_banhang.DONGIA) as don_gia, hoadonbanhang.NGAYLAPHD FROM chitiethoadon_banhang INNER JOIN hoadonbanhang ON chitiethoadon_banhang.MAHD = hoadonbanhang.MAHD INNER JOIN sanpham ON chitiethoadon_banhang.MASP = sanpham.MASP WHERE hoadonbanhang.NGAYLAPHD = CURRENT_DATE() GROUP BY chitiethoadon_banhang.MASP";
+            return mysqli_query($this->con, $sql);
+        }
+
+        public function getDoanhthuMonth () {
+            $sql = "SELECT chitiethoadon_banhang.MASP, sanpham.TENSP, sanpham.SIZE, sum(chitiethoadon_banhang.SOLUONG) as so_luong, sanpham.GIA, sum(chitiethoadon_banhang.DONGIA) as don_gia, hoadonbanhang.NGAYLAPHD FROM chitiethoadon_banhang INNER JOIN hoadonbanhang ON chitiethoadon_banhang.MAHD = hoadonbanhang.MAHD INNER JOIN sanpham ON chitiethoadon_banhang.MASP = sanpham.MASP WHERE MONTH(hoadonbanhang.NGAYLAPHD) = MONTH(CURRENT_DATE()) GROUP BY chitiethoadon_banhang.MASP";
             return mysqli_query($this->con, $sql);
         }
 

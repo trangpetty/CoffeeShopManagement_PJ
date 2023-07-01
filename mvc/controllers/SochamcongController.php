@@ -11,13 +11,12 @@
         }
         
         function getList () {
-            $sochamcong = $this->model("Sochamcong");
-            return $this->view('sochamcong/list', ['sochamcong' => $sochamcong->orderBy($_POST['text'], $_POST['filter'])]);
+            $this->paginate(2, 'Sochamcong', '*', $_POST['text'], $_POST['filter']);
         }
         
         function search () {
             $sochamcong = $this->model("Sochamcong");
-            return $this->view('sochamcong/list', ['sochamcong' => $sochamcong->like('MANV', '%'.$_POST['pattern'].'%')]);
+            return $this->view('sochamcong/list', ['data' => $sochamcong->like('MANV', '%'.$_POST['pattern'].'%')]);
         }
 
         function create () {

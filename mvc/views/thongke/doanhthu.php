@@ -1,19 +1,12 @@
-<div class="d-flex justify-content-between mb-2">
-        <h3>Doanh thu</h3>
-        <select name="select_time" id="select_time" class="form-select" style="width: 8rem;height: 2.5rem;">
-                    <option value="day">Day</option>
-                    <option value="month">Month</option>
-        </select>
-</div>
 <table class="table mx-auto">
     <thead class="bg-brown text-white">
     <tr>
-        <td>Ma SP</td>
-        <td>TEN SP</td>
-        <td>SIZE</td>
-        <td>SO LUONG</td>
-        <td>GIA</td>
-        <td>DON GIA</td>
+        <td>Mã SP</td>
+        <td>Tên SP</td>
+        <td>Size</td>
+        <td>Số lượng</td>
+        <td>Giá</td>
+        <td>Đơn giá</td>
     </tr>
     </thead>
     <tbody>

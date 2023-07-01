@@ -10,12 +10,12 @@
 
         function search () {
             $hoadon = $this->model("Hoadon");
-            return $this->view('hoadon/list', ['hoadon' => $hoadon->like('MANV', '%'.$_POST['pattern'].'%')]);
+            return $this->view('hoadon/list', ['data' => $hoadon->orlike('MAHD', 'MANV', '%'.$_POST['pattern'].'%')]);
         }
 
         function getList () {
-            $hoadon = $this->model("Hoadon");
-            return $this->view('hoadon/list', ['hoadon' => $hoadon->all()]);
+            $this->paginate(5, 'Hoadon', 'MAHD', $_POST['text'], $_POST['filter']);
+
         }
 
         function getDetail ($id) {

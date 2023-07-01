@@ -1,6 +1,28 @@
 :root {
     --brown: #724e2c;
+    --light-brown: #C4A484;
 }
+a {
+    cursor: pointer;
+}
+
+.icon-arrow.active {
+    color: var(--brown);
+}
+
+.icon-arrow {
+    color: var(--light-brown);
+}
+
+.nav-link.active {
+    background-color: var(--brown);
+    color: #fff;
+}
+
+.nav-link {
+    color: var(--brown);
+}
+
 .bg-brown {
     border-color: var(--brown)!important;
     background-color: var(--brown)!important;

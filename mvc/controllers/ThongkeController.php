@@ -14,9 +14,19 @@
             $top = $this->model("ChitietHoadon")->getTopSP();
             return $this->view('thongke/topSP', ['topSP' => $top]);
         }
+
+        function getTopSPDay () {
+            $top = $this->model("ChitietHoadon")->getTopSPDay();
+            return $this->view('thongke/topSP', ['topSP' => $top]);
+        }
         
         function getDoanhthu () {
             $top = $this->model("ChitietHoadon")->getDoanhthu();
+            return $this->view('thongke/doanhthu', ['doanhthu' => $top]);
+        }
+
+        function getDoanhthuMonth () {
+            $top = $this->model("ChitietHoadon")->getDoanhthuMonth();
             return $this->view('thongke/doanhthu', ['doanhthu' => $top]);
         }
 
@@ -44,11 +54,8 @@
         }
 
         function getLuongMonth () {
-            $top = $this->model("Sochamcong")->getLuongMonth($_GET['month']);
-            $this->view("index", [
-                'page' => 'thongke/luong',
-                'luong' => $top
-            ]);
+            $top = $this->model("Sochamcong")->getLuongMonth($_POST['month']);
+            return $this->view("thongke/list_luong", ['luong' => $top]);
         }
     }
 
